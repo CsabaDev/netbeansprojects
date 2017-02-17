@@ -1,6 +1,6 @@
 package logika;
 
-class SzamlaKezelo {
+public class SzamlaKezelo {
 
     private final BankSzamla szamla;
     

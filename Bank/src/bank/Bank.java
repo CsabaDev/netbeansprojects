@@ -1,8 +1,7 @@
 package bank;
 
-import logika.Hozzafero;
 import logika.BankSzamla;
-import java.util.ArrayList;
+import logika.SzamlaKezelo;
 
 public class Bank {
 
@@ -10,8 +9,15 @@ public class Bank {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SzamlaKezelo szamlaKezelo =  new SzamlaKezelo();
-        //bankSzamla.hozzaferok = new ArrayList<Hozzafero>();
+        
+        BankSzamla szamla = new BankSzamla(35, 1);
+        
+        SzamlaKezelo szamlaKezelo =  new SzamlaKezelo(szamla);
+        
+        szamlaKezelo.betesz(10000);
+        System.out.println(szamla.getEgyenleg());
+        szamlaKezelo.kivesz(19000);
+        System.out.println(szamla.getEgyenleg());
     }
     
 }

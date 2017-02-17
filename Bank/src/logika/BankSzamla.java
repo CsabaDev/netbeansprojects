@@ -8,6 +8,13 @@ public class BankSzamla {
     public List<Hozzafero> hozzaferok = new ArrayList<>();
     private int dijMin;
     private int dijSzazalek;
+
+    public BankSzamla(int dijMin, int dijSzazalek) {
+        this.dijMin = dijMin;
+        this.dijSzazalek = dijSzazalek;
+    }
+    
+    
     
     public void lekerdez(Hozzafero hozzafero){
         
