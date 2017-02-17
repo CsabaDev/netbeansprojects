@@ -9,10 +9,6 @@ public class BankSzamla {
     private int dijMin;
     private int dijSzazalek;
     
-    private void urit(){
-        
-    }
-    
     public void lekerdez(Hozzafero hozzafero){
         
     }
@@ -58,7 +54,7 @@ public class BankSzamla {
         if (dijSzazalek < 0){
             System.out.println("Negativ dijat nem szamitunk fel.");
             //throw RuntimeException;
-        }if (dijSzazalek > 20){
+        }if (dijSzazalek > 10){
             System.out.println("Tul koltseges.");
             //throw RuntimeException;
         }else{
@@ -66,21 +62,6 @@ public class BankSzamla {
         }
         
     }
-    
-    public String toStringBe(Hozzafero hozzafero, int osszeg, int tranzakcioDij){
-        return
-                hozzafero.nev + " betett a szamlara " + osszeg + " forintot.\n"
-                + "A tranzakcio dija: " + tranzakcioDij + "\n" 
-                + "Az uj egyenleg: " + egyenleg;
-    }
-    
-    public String toStringKi(Hozzafero hozzafero, int osszeg, int tranzakcioDij){
-        return
-                hozzafero.nev + " kivett a szamlarol " + osszeg + " forintot.\n"
-                + "A tranzakcio dija: " + tranzakcioDij + "\n" 
-                + "Az uj egyenleg: " + egyenleg;
-    }
-
     
     
 }

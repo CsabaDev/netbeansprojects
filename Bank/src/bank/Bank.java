@@ -10,8 +10,8 @@ public class Bank {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BankSzamla bankSzamla =  new BankSzamla();
-        bankSzamla.hozzaferok = new ArrayList<Hozzafero>();
+        SzamlaKezelo szamlaKezelo =  new SzamlaKezelo();
+        //bankSzamla.hozzaferok = new ArrayList<Hozzafero>();
     }
     
 }
