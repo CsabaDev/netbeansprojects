@@ -10,14 +10,20 @@ public class Bank {
      */
     public static void main(String[] args) {
         
-        BankSzamla szamla = new BankSzamla(35, 1);
+        Terminal terminal = new Terminal();
+        terminal.indit();
         
-        SzamlaKezelo szamlaKezelo =  new SzamlaKezelo(szamla);
+//        BankSzamla szamla = new BankSzamla(35, 1);
+//        
+//        SzamlaKezelo szamlaKezelo =  new SzamlaKezelo(szamla);
+//        
+//        szamlaKezelo.betesz(10000);
+//        System.out.println(szamla.getEgyenleg());
+//        szamlaKezelo.hozzaferotFelvesz("kati");
+//        szamlaKezelo.hozzaferotFelvesz("pisti");
+//        szamlaKezelo.hozzaferotFelvesz("pisti");
+//        szamlaKezelo.hozzaferotFelvesz("misi");
         
-        szamlaKezelo.betesz(10000);
-        System.out.println(szamla.getEgyenleg());
-        szamlaKezelo.kivesz(19000);
-        System.out.println(szamla.getEgyenleg());
     }
     
 }
