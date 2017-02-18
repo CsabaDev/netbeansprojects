@@ -35,7 +35,7 @@ public class SzamlaKezelo {
     
     private void fedezetetEllenoriz(int osszeg, int tranzakcioDij){
         if(szamla.egyenleg - tranzakcioDij + osszeg <= 0){
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("nincs fedezet");
         }
     }
     
@@ -45,18 +45,39 @@ public class SzamlaKezelo {
         }
     }
     
+    
     public String toStringBe(Hozzafero hozzafero, int ujEgyenleg, int osszeg, int tranzakcioDij){
         return
-                hozzafero.nev + " betett a szamlara " + osszeg + " forintot.\n"
+                hozzafero.getNev() + " betett a szamlara " + osszeg + " forintot.\n"
                 + "A tranzakcio dija: " + tranzakcioDij + "\n" 
                 + "Az uj egyenleg: " + ujEgyenleg;
     }
     
     public String toStringKi(Hozzafero hozzafero, int ujEgyenleg, int osszeg, int tranzakcioDij){
         return
-                hozzafero.nev + " kivett a szamlarol " + osszeg + " forintot.\n"
+                hozzafero.getNev() + " kivett a szamlarol " + osszeg + " forintot.\n"
                 + "A tranzakcio dija: " + tranzakcioDij + "\n" 
                 + "Az uj egyenleg: " + ujEgyenleg;
     }
     
+    
+    public void hozzaferotFelvesz(String nev){
+        if (szamla.hozzaferok.size() == 3){
+            throw new UnsupportedOperationException("max 3 fo");
+        }
+        for (int i = 0; i < szamla.hozzaferok.size(); i++) {
+            if (szamla.hozzaferok.get(i).getNev().equals(nev)){
+                throw new UnsupportedOperationException(nev+" mar hozzafero");
+            }
+        }
+        Hozzafero hozzafero = new Hozzafero(nev);
+        szamla.hozzaferok.add(hozzafero);
+    }
+    
+    public void hozzaferotEltavolit(Hozzafero hozzafero){
+        if (szamla.hozzaferok.size() == 1){
+            throw new UnsupportedOperationException();
+        }
+        szamla.hozzaferok.remove(hozzafero);
+    }
 }
