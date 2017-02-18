@@ -25,7 +25,7 @@ public class SzamlaKezelo {
         szamla.egyenleg += osszeg - tranzakcioDij;
     }
     
-    private int dijSzamol(int osszeg){
+    public int dijSzamol(int osszeg){
         int tranzakcioDij = osszeg * szamla.getDijSzazalek() / 100;
         if (tranzakcioDij < szamla.getDijMin()){
             tranzakcioDij = szamla.getDijMin();
@@ -41,7 +41,7 @@ public class SzamlaKezelo {
     
     private void elojeletEllenoriz(int osszeg){
         if (osszeg <= 0){
-            throw new UnsupportedOperationException();
+            throw new UnsupportedOperationException("Pozitiv egesz szamot adjon meg!");
         }
     }
     
