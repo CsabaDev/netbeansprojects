@@ -2,6 +2,7 @@ package bank;
 
 import java.util.Scanner;
 import logika.BankSzamla;
+import logika.Hozzafero;
 import logika.SzamlaKezelo;
 
 public class Terminal {
@@ -15,6 +16,7 @@ public class Terminal {
     }
     
     Scanner beOlvas = new Scanner(System.in);
+    Hozzafero aktivHozzafero;
     
     public void indit(){
         
@@ -24,7 +26,7 @@ public class Terminal {
         toStringKoltsegek();
         System.out.println("Adja meg az elso hozzafero nevet!");
         kezelo.hozzaferotFelvesz(beOlvas.nextLine());
-        muveletetValaszt();
+        login();
         
     }
     
@@ -115,7 +117,19 @@ public class Terminal {
     private void kilep() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    private void login() {
+        System.out.println("Adja meg a hozzafero nevet!");
+        String nev = beOlvas.nextLine();
+        try{
+            aktivHozzafero = kezelo.hozzaferotKeres(nev);
+        }catch (UnsupportedOperationException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
     
-    
+    private void logout() {
+        aktivHozzafero = null;
+    }
 
 }

@@ -80,4 +80,13 @@ public class SzamlaKezelo {
         }
         szamla.hozzaferok.remove(hozzafero);
     }
+    
+    public Hozzafero hozzaferotKeres(String nev){
+        for (int i = 0; i < szamla.hozzaferok.size(); i++) {
+            if (szamla.hozzaferok.get(i).getNev().equals(nev)){
+                return szamla.hozzaferok.get(i);
+            }
+        }
+        throw new UnsupportedOperationException("Nincs ilyen nevu felhasznalo.");
+    }
 }
