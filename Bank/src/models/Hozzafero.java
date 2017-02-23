@@ -1,4 +1,4 @@
-package logika;
+package models;
 
 public class Hozzafero {
     private String nev;

@@ -1,5 +1,9 @@
 package logika;
 
+import models.Hozzafero;
+import models.BankSzamla;
+import models.Tranzakcio;
+
 public class SzamlaKezelo {
 
     private final BankSzamla szamla;
@@ -22,7 +26,12 @@ public class SzamlaKezelo {
     private void vegrehajt(int osszeg){
         int tranzakcioDij = dijSzamol(osszeg);
         fedezetetEllenoriz(osszeg, tranzakcioDij);
-        szamla.egyenleg += osszeg - tranzakcioDij;
+        int egyenleg = szamla.getEgyenleg();
+        egyenleg += osszeg - tranzakcioDij;
+        szamla.setEgyenleg(egyenleg);
+        
+        Tranzakcio tranzakcio = new Tranzakcio(osszeg, tranzakcioDij, egyenleg);
+        szamla.getTranzakciok().add(tranzakcio);
     }
     
     public int dijSzamol(int osszeg){
@@ -34,7 +43,7 @@ public class SzamlaKezelo {
     }
     
     private void fedezetetEllenoriz(int osszeg, int tranzakcioDij){
-        if(szamla.egyenleg - tranzakcioDij + osszeg <= 0){
+        if(szamla.getEgyenleg() - tranzakcioDij + osszeg <= 0){
             throw new UnsupportedOperationException("nincs fedezet");
         }
     }
@@ -79,6 +88,16 @@ public class SzamlaKezelo {
             throw new UnsupportedOperationException();
         }
         szamla.hozzaferok.remove(hozzafero);
+    }
+    
+    public boolean vanEIlyenHozzafero(String nev){
+        for (Hozzafero hozzafero : szamla.hozzaferok) {
+            if (hozzafero.getNev().equals(nev)){
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     public Hozzafero hozzaferotKeres(String nev){
