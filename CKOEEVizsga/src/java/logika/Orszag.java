@@ -5,10 +5,12 @@
  */
 package logika;
 
+import modell.Baba;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import modell.Korhaz;
 
 /**
  *
@@ -42,7 +44,7 @@ public class Orszag {
     }
     
     public void ujSzuletes(String nev, String anyaNev, 
-            String apaNev, int nem, String varos, String korhaz){
+            String apaNev, int nem, String varos, Korhaz korhaz){
         Baba ujBaba = new Baba();
         ujBaba.setNev(nev);
         Calendar ma = Calendar.getInstance();
