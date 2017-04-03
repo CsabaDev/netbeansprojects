@@ -1,16 +1,16 @@
 package bank;
 
-import logika.BankSzamla;
-import logika.SzamlaKezelo;
+import models.Bank;
 
-public class Bank {
-
+public class Program {
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         
-        Terminal terminal = new Terminal();
+        Bank bank = new Bank(true);
+        
+        Terminal terminal = new Terminal(bank);
         terminal.indit();
         
 //        BankSzamla szamla = new BankSzamla(35, 1);
@@ -25,5 +25,4 @@ public class Bank {
 //        szamlaKezelo.hozzaferotFelvesz("misi");
         
     }
-    
 }
