@@ -6,16 +6,20 @@
 package logika;
 
 import entities.Baba;
+import entities.Korhaz;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import persistence.BabaJpaController;
+import persistence.KorhazJpaController;
 
 /**
  *
@@ -24,6 +28,7 @@ import persistence.BabaJpaController;
 public class BabaRegisztralo extends HttpServlet {
 
     private BabaJpaController babaController;
+    private KorhazJpaController korhazController;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,6 +44,9 @@ public class BabaRegisztralo extends HttpServlet {
         if (babaController == null) {
             babaController = new BabaJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
         }
+        if (korhazController == null) {
+            korhazController = new KorhazJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+        }
         Baba ujBaba = new Baba();
         ujBaba.setNev(request.getParameter("nev"));
         Calendar ma = Calendar.getInstance();
@@ -48,10 +56,17 @@ public class BabaRegisztralo extends HttpServlet {
         ujBaba.setApaNev(request.getParameter("apaNev"));
         ujBaba.setNem(Integer.valueOf((request.getParameter("nem"))));
         ujBaba.setVaros(request.getParameter("varos"));
-        //ujBaba.setKorhaz(request.getParameter("korhaz"));
+        String korhazIdString = request.getParameter("korhaz");
+        Long korhazId = Long.valueOf(korhazIdString);
+        Korhaz korhaz = korhazController.findKorhaz(korhazId);
+        ujBaba.setKorhaz(korhaz);
         String adoszam = "123456789123";
         ujBaba.setAdoszam(adoszam);
-//        babaController.create(ujBaba);
+        try {
+            babaController.create(ujBaba);
+        } catch (Exception ex) {
+            Logger.getLogger(BabaRegisztralo.class.getName()).log(Level.SEVERE, null, ex);
+        }
         response.sendRedirect("babak.jsp");
     }
 

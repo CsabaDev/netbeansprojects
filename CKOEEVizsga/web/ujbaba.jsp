@@ -57,7 +57,7 @@
                             <%  KorhazJpaController korhazController = new KorhazJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
                             List<Korhaz> korhazak = korhazController.findKorhazEntities();
                             for (int i = 0; i < korhazak.size(); i++) { %>
-                                <option value="<%= korhazak.get(i) %>"><%= korhazak.get(i).getNev() %></option>
+                                <option value="<%= korhazak.get(i).getId() %>"><%= korhazak.get(i).getNev() %></option>
                             <%}%>
                             </select>
                         <td>
