@@ -5,12 +5,12 @@
  */
 package logika;
 
-import modell.Baba;
+import entities.Baba;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import modell.Korhaz;
+import entities.Korhaz;
 
 /**
  *

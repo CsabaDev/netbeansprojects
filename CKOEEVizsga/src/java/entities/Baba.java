@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package modell;
+package entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.resource.spi.AuthenticationMechanism;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
