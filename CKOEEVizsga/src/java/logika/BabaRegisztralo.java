@@ -5,18 +5,25 @@
  */
 package logika;
 
+import entities.Baba;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
+import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistence.BabaJpaController;
 
 /**
  *
  * @author User
  */
 public class BabaRegisztralo extends HttpServlet {
+
+    private BabaJpaController babaController;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,8 +36,22 @@ public class BabaRegisztralo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
-        
-        
+        if (babaController == null) {
+            babaController = new BabaJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+        }
+        Baba ujBaba = new Baba();
+        ujBaba.setNev(request.getParameter("nev"));
+        Calendar ma = Calendar.getInstance();
+        Date szulDatum = ma.getTime();
+        ujBaba.setSzulDatum(szulDatum);
+        ujBaba.setAnyaNev(request.getParameter("anyaNev"));
+        ujBaba.setApaNev(request.getParameter("apaNev"));
+        ujBaba.setNem(Integer.valueOf((request.getParameter("nem"))));
+        ujBaba.setVaros(request.getParameter("varos"));
+        //ujBaba.setKorhaz(request.getParameter("korhaz"));
+        String adoszam = "123456789123";
+        ujBaba.setAdoszam(adoszam);
+//        babaController.create(ujBaba);
         response.sendRedirect("babak.jsp");
     }
 

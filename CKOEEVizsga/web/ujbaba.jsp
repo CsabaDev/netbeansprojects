@@ -4,6 +4,11 @@
     Author     : Czinéné Kertész Orsolya
 --%>
 
+<%@page import="javax.persistence.Persistence"%>
+<%@page import="persistence.KorhazJpaController"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entities.Korhaz"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -47,7 +52,15 @@
                     </tr>
                     <tr>
                         <td>Kórház:</td>
-                        <td><input type="text" name="korhaz" value="" /></td>
+                        <td>
+                            <select name="korhaz">
+                            <%  KorhazJpaController korhazController = new KorhazJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+                            List<Korhaz> korhazak = korhazController.findKorhazEntities();
+                            for (int i = 0; i < korhazak.size(); i++) { %>
+                                <option value="<%= korhazak.get(i) %>"><%= korhazak.get(i).getNev() %></option>
+                            <%}%>
+                            </select>
+                        <td>
                     </tr>
                 </tbody>
             </table>

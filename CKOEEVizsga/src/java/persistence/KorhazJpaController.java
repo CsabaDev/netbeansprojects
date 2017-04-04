@@ -26,10 +26,15 @@ import persistence.exceptions.RollbackFailureException;
  */
 public class KorhazJpaController implements Serializable {
 
+    public KorhazJpaController(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+    
     public KorhazJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
+    
     private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
 

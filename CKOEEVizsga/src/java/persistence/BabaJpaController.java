@@ -15,7 +15,6 @@ import entities.Korhaz;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.transaction.UserTransaction;
 import persistence.exceptions.NonexistentEntityException;
 import persistence.exceptions.RollbackFailureException;
 
@@ -25,11 +24,10 @@ import persistence.exceptions.RollbackFailureException;
  */
 public class BabaJpaController implements Serializable {
 
-    public BabaJpaController(UserTransaction utx, EntityManagerFactory emf) {
-        this.utx = utx;
+    public BabaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private UserTransaction utx = null;
+    
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -39,8 +37,8 @@ public class BabaJpaController implements Serializable {
     public void create(Baba baba) throws RollbackFailureException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Korhaz korhaz = baba.getKorhaz();
             if (korhaz != null) {
                 korhaz = em.getReference(korhaz.getClass(), korhaz.getId());
@@ -51,10 +49,10 @@ public class BabaJpaController implements Serializable {
                 korhaz.getBabak().add(baba);
                 korhaz = em.merge(korhaz);
             }
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                em.getTransaction().rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -69,8 +67,8 @@ public class BabaJpaController implements Serializable {
     public void edit(Baba baba) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Baba persistentBaba = em.find(Baba.class, baba.getId());
             Korhaz korhazOld = persistentBaba.getKorhaz();
             Korhaz korhazNew = baba.getKorhaz();
@@ -87,10 +85,10 @@ public class BabaJpaController implements Serializable {
                 korhazNew.getBabak().add(baba);
                 korhazNew = em.merge(korhazNew);
             }
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                em.getTransaction().rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
@@ -112,8 +110,8 @@ public class BabaJpaController implements Serializable {
     public void destroy(Long id) throws NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
-            utx.begin();
             em = getEntityManager();
+            em.getTransaction().begin();
             Baba baba;
             try {
                 baba = em.getReference(Baba.class, id);
@@ -127,10 +125,10 @@ public class BabaJpaController implements Serializable {
                 korhaz = em.merge(korhaz);
             }
             em.remove(baba);
-            utx.commit();
+            em.getTransaction().commit();
         } catch (Exception ex) {
             try {
-                utx.rollback();
+                em.getTransaction().rollback();
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }

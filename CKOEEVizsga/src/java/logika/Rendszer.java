@@ -16,10 +16,22 @@ import entities.Korhaz;
  *
  * @author Czinéné Kertész Orsolya
  */
-public class Orszag {
+public class Rendszer {
     private List<Baba> osszesBaba;
+    private List<Korhaz> korhazak;
     
     Random rnd = new Random();
+
+    public List<Baba> getOsszesBaba() {
+        return osszesBaba;
+    }
+
+    public List<Korhaz> getKorhazak() {
+        
+        return korhazak;
+    }
+    
+    
     
     public String ujAdoszam(){
         String adoszam;
