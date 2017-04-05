@@ -5,30 +5,20 @@
  */
 package logika;
 
-import entities.Baba;
-import entities.Korhaz;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import persistence.BabaJpaController;
-import persistence.KorhazJpaController;
 
 /**
  *
  * @author User
  */
-public class BabaRegisztralo extends HttpServlet {
-
-    private BabaJpaController babaController;
-    private KorhazJpaController korhazController;
+public class AdoszamKuldo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,39 +30,23 @@ public class BabaRegisztralo extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
-        if (babaController == null) {
-            babaController = new BabaJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+            throws ServletException, IOException {
+        System.out.println("KERES ERKEZETT.");
+        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            BabaJpaController babaController = new BabaJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+            String adoszam = ujAdoszam(babaController);
+            out.println(adoszam);
+            System.out.println("KERES ERKEZETT.");
         }
-        if (korhazController == null) {
-            korhazController = new KorhazJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
-        }
-        Baba ujBaba = new Baba();
-        ujSzuletes(ujBaba, request, korhazController, babaController);
-        response.sendRedirect("babak.jsp");
     }
     
-    public void ujSzuletes(Baba ujBaba, HttpServletRequest request, 
-            KorhazJpaController korhazController, BabaJpaController babaController){
-        ujBaba.setNev(request.getParameter("nev"));
-        Calendar ma = Calendar.getInstance();
-        Date szulDatum = ma.getTime();
-        ujBaba.setSzulDatum(szulDatum);
-        ujBaba.setAnyaNev(request.getParameter("anyaNev"));
-        ujBaba.setApaNev(request.getParameter("apaNev"));
-        ujBaba.setNem(Integer.valueOf((request.getParameter("nem"))));
-        ujBaba.setVaros(request.getParameter("varos"));
-        String korhazIdString = request.getParameter("korhaz");
-        Long korhazId = Long.valueOf(korhazIdString);
-        Korhaz korhaz = korhazController.findKorhaz(korhazId);
-        ujBaba.setKorhaz(korhaz);
-        String adoszam = "123456789123";
-        ujBaba.setAdoszam(adoszam);
-        try {
-            babaController.create(ujBaba);
-        } catch (Exception ex) {
-            Logger.getLogger(BabaRegisztralo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public String ujAdoszam(BabaJpaController babaController){
+        int sorszam = babaController.getBabaCount();
+        String adoszam = String.valueOf(sorszam);
+        return adoszam;
     }
     
     

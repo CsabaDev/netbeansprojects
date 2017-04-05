@@ -11,6 +11,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import entities.Korhaz;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import persistence.BabaJpaController;
+import persistence.KorhazJpaController;
 
 /**
  *
@@ -33,42 +38,33 @@ public class Rendszer {
     
     
     
-    public String ujAdoszam(){
-        String adoszam;
-        adoszam = atvalto(osszesBaba.size());
+    public String ujAdoszam(BabaJpaController babaController){
+        int sorszam = babaController.getBabaCount();
+        String adoszam = String.valueOf(sorszam);
         return adoszam;
     }
     
-    public String atvalto(int decim){
-        char[] symbols = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
-        char[] temp = new char[12];
-        int i = 11;
-        int szam = decim;
-        while(szam != 0 && i >= 0){            
-            temp[i] = symbols[szam/36 % 36];
-            szam = decim/36;
-            i--;
-        }
-        for (int j = 0; j <= i; j++) {
-            temp[j] = symbols[rnd.nextInt(symbols.length)];
-        }
-        return temp.toString();
-    }
-    
-    public void ujSzuletes(String nev, String anyaNev, 
-            String apaNev, int nem, String varos, Korhaz korhaz){
-        Baba ujBaba = new Baba();
-        ujBaba.setNev(nev);
-        Calendar ma = Calendar.getInstance();
-        Date szulDatum = ma.getTime();
-        ujBaba.setSzulDatum(szulDatum);
-        ujBaba.setAnyaNev(anyaNev);
-        ujBaba.setApaNev(apaNev);
-        ujBaba.setNem(nem);
-        ujBaba.setVaros(varos);
-        ujBaba.setKorhaz(korhaz);
-        String adoszam = ujAdoszam();
-        ujBaba.setAdoszam(adoszam);
-        osszesBaba.add(ujBaba);
-    }
+//    
+//    public static void ujSzuletes(Baba ujBaba, HttpServletRequest request, 
+//            KorhazJpaController korhazController, BabaJpaController babaController){
+//        ujBaba.setNev(request.getParameter("nev"));
+//        Calendar ma = Calendar.getInstance();
+//        Date szulDatum = ma.getTime();
+//        ujBaba.setSzulDatum(szulDatum);
+//        ujBaba.setAnyaNev(request.getParameter("anyaNev"));
+//        ujBaba.setApaNev(request.getParameter("apaNev"));
+//        ujBaba.setNem(Integer.valueOf((request.getParameter("nem"))));
+//        ujBaba.setVaros(request.getParameter("varos"));
+//        String korhazIdString = request.getParameter("korhaz");
+//        Long korhazId = Long.valueOf(korhazIdString);
+//        Korhaz korhaz = korhazController.findKorhaz(korhazId);
+//        ujBaba.setKorhaz(korhaz);
+//        String adoszam = "123456789123";
+//        ujBaba.setAdoszam(adoszam);
+//        try {
+//            babaController.create(ujBaba);
+//        } catch (Exception ex) {
+//            Logger.getLogger(BabaRegisztralo.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 }

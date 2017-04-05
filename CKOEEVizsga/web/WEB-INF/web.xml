@@ -4,9 +4,17 @@
         <servlet-name>BabaRegisztralo</servlet-name>
         <servlet-class>logika.BabaRegisztralo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdoszamKuldo</servlet-name>
+        <servlet-class>logika.AdoszamKuldo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BabaRegisztralo</servlet-name>
         <url-pattern>/BabaRegisztralo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdoszamKuldo</servlet-name>
+        <url-pattern>/AdoszamKuldo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

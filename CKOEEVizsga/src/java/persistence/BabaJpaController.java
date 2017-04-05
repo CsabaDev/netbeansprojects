@@ -107,38 +107,38 @@ public class BabaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException, RollbackFailureException, Exception {
-        EntityManager em = null;
-        try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Baba baba;
-            try {
-                baba = em.getReference(Baba.class, id);
-                baba.getId();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The baba with id " + id + " no longer exists.", enfe);
-            }
-            Korhaz korhaz = baba.getKorhaz();
-            if (korhaz != null) {
-                korhaz.getBabak().remove(baba);
-                korhaz = em.merge(korhaz);
-            }
-            em.remove(baba);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            try {
-                em.getTransaction().rollback();
-            } catch (Exception re) {
-                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
+//    public void destroy(Long id) throws NonexistentEntityException, RollbackFailureException, Exception {
+//        EntityManager em = null;
+//        try {
+//            em = getEntityManager();
+//            em.getTransaction().begin();
+//            Baba baba;
+//            try {
+//                baba = em.getReference(Baba.class, id);
+//                baba.getId();
+//            } catch (EntityNotFoundException enfe) {
+//                throw new NonexistentEntityException("The baba with id " + id + " no longer exists.", enfe);
+//            }
+//            Korhaz korhaz = baba.getKorhaz();
+//            if (korhaz != null) {
+//                korhaz.getBabak().remove(baba);
+//                korhaz = em.merge(korhaz);
+//            }
+//            em.remove(baba);
+//            em.getTransaction().commit();
+//        } catch (Exception ex) {
+//            try {
+//                em.getTransaction().rollback();
+//            } catch (Exception re) {
+//                throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
+//            }
+//            throw ex;
+//        } finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
+//    }
 
     public List<Baba> findBabaEntities() {
         return findBabaEntities(true, -1, -1);
