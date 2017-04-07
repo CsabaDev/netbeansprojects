@@ -9,6 +9,7 @@ import entities.Baba;
 import entities.Korhaz;
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 import persistence.BabaJpaController;
 import persistence.KorhazJpaController;
 
@@ -47,13 +49,19 @@ public class BabaRegisztralo extends HttpServlet {
         if (korhazController == null) {
             korhazController = new KorhazJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
         }
-        Baba ujBaba = new Baba();
-        ujSzuletes(ujBaba, request, korhazController, babaController);
-        response.sendRedirect("babak.jsp");
+        //Baba ujBaba = new Baba();
+        Baba ujBaba = (Baba)request.getSession().getAttribute("ujBaba");
+        try {
+            ujSzuletes(ujBaba, request, korhazController, babaController);
+            response.sendRedirect("babak.jsp");
+        } catch (Exception ex) {
+            response.sendRedirect("ujbaba.jsp");
+        }
+        
     }
     
     public void ujSzuletes(Baba ujBaba, HttpServletRequest request, 
-            KorhazJpaController korhazController, BabaJpaController babaController){
+            KorhazJpaController korhazController, BabaJpaController babaController) throws Exception{
         ujBaba.setNev(request.getParameter("nev"));
         Calendar ma = Calendar.getInstance();
         Date szulDatum = ma.getTime();

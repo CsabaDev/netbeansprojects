@@ -13,9 +13,12 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <jsp:useBean id="ujBaba" scope="request" class="entities.Baba" />
-        <jsp:setProperty name="ujBaba" property="*" />
-    <p1>Új Baba neve: <jsp:getProperty name="ujBaba" property="nev" /></p1>
-    <p1>Új Baba neme: <jsp:getProperty name="ujBaba" property="nem" /></p1>
+    <jsp:useBean id="ujBaba" scope="session" class="entities.Baba" />
+    <p>Új Baba neve: <jsp:getProperty name="ujBaba" property="nev" /></p>
+    <p>Új Baba neme: <jsp:getProperty name="ujBaba" property="nem" /></p>
+    <p>Új Baba anyja neve: <jsp:getProperty name="ujBaba" property="anyaNev" /></p>
+    <p>Új Baba neme: <jsp:getProperty name="ujBaba" property="nem" /></p>
+    <p>Új Baba neve: <jsp:getProperty name="ujBaba" property="nev" /></p>
+    <p>Új Baba neme: <jsp:getProperty name="ujBaba" property="nem" /></p>
     </body>
 </html>

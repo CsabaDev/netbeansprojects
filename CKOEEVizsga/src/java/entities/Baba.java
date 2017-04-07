@@ -49,8 +49,12 @@ public class Baba implements Serializable{
         return nev;
     }
 
-    public void setNev(String nev) {
-        this.nev = nev;
+    public void setNev(String nev) throws Exception {
+        if (nev.toCharArray().length != 0) {
+            this.nev = nev;
+        } else{
+            throw new Exception("Nem adott meg nevet!");
+        }
     }
 
     public Date getSzulDatum() {
