@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,11 +51,7 @@ public class Baba implements Serializable{
     }
 
     public void setNev(String nev) throws Exception {
-        if (nev.toCharArray().length != 0) {
-            this.nev = nev;
-        } else{
-            throw new Exception("Nem adott meg nevet!");
-        }
+        this.nev = nev;
     }
 
     public Date getSzulDatum() {

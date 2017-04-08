@@ -15,7 +15,6 @@
     <body>
         <h1>Hello World!</h1>
         <jsp:useBean id="osszesBaba" scope="page" class="persistence.BabaJpaController" />
-        
         <c:set var="babaTable" scope="page" value="${osszesBaba.findBabaEntities()}"/>
         <table border="1">
             <thead>

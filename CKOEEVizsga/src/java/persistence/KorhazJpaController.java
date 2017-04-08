@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.transaction.UserTransaction;
 import persistence.exceptions.NonexistentEntityException;
 import persistence.exceptions.RollbackFailureException;
@@ -26,6 +27,10 @@ import persistence.exceptions.RollbackFailureException;
  */
 public class KorhazJpaController implements Serializable {
 
+    public KorhazJpaController(){
+        this(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+    }
+    
     public KorhazJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
