@@ -74,8 +74,7 @@ public class BabaRegisztralo extends HttpServlet {
         Long korhazId = Long.valueOf(korhazIdString);
         Korhaz korhaz = korhazController.findKorhaz(korhazId);
         ujBaba.setKorhaz(korhaz);
-        String adoszam = "123456789123";
-        ujBaba.setAdoszam(adoszam);
+        ujBaba.setAdoszam(request.getParameter("adoszam"));
         try {
             babaController.create(ujBaba);
         } catch (Exception ex) {

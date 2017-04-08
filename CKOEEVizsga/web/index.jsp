@@ -14,5 +14,6 @@
     <body>
         <h1>Babakezelő-rendszer</h1>
         <a href="ujbaba.jsp">Új baba regisztrálása</a>
+        <a href="babak.jsp">Áttekintés</a>
     </body>
 </html>

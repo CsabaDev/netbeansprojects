@@ -15,6 +15,7 @@ import entities.Korhaz;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import persistence.exceptions.NonexistentEntityException;
 import persistence.exceptions.RollbackFailureException;
 
@@ -24,6 +25,10 @@ import persistence.exceptions.RollbackFailureException;
  */
 public class BabaJpaController implements Serializable {
 
+    public BabaJpaController(){
+        this(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+    }
+    
     public BabaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }

@@ -140,7 +140,7 @@ public class Baba implements Serializable{
                 nev, anyaNev, apaNev, adoszam, korhaz, varos);
     }
     
-    public String toString(int nem){
+    public String nemToString(int nem){
         if(nem %2 == 0){
             return "nő";
         }else{
