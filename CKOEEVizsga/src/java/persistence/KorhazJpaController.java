@@ -23,7 +23,7 @@ import persistence.exceptions.RollbackFailureException;
 
 /**
  *
- * @author User
+ * @author Czinéné Kertész Orsolya
  */
 public class KorhazJpaController implements Serializable {
 
@@ -35,6 +35,10 @@ public class KorhazJpaController implements Serializable {
         this.emf = emf;
     }
     
+    public KorhazJpaController(EntityManager em) {
+        this.em = em;
+    }
+    
     public KorhazJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
@@ -42,33 +46,37 @@ public class KorhazJpaController implements Serializable {
     
     private UserTransaction utx = null;
     private EntityManagerFactory emf = null;
+    private EntityManager em = null;
 
     public EntityManager getEntityManager() {
-        return emf.createEntityManager();
+        if(em == null){
+            return emf.createEntityManager();
+        }
+        return em;
     }
 
     public void create(Korhaz korhaz) throws RollbackFailureException, Exception {
         if (korhaz.getBabak() == null) {
-            korhaz.setBabak(new ArrayList<Baba>());
+            korhaz.setBabak(new ArrayList<>());
         }
-        EntityManager em = null;
+        EntityManager entityManager = null;
         try {
             utx.begin();
-            em = getEntityManager();
-            List<Baba> attachedBabak = new ArrayList<Baba>();
+            entityManager = getEntityManager();
+            List<Baba> attachedBabak = new ArrayList<>();
             for (Baba babakBabaToAttach : korhaz.getBabak()) {
-                babakBabaToAttach = em.getReference(babakBabaToAttach.getClass(), babakBabaToAttach.getId());
+                babakBabaToAttach = entityManager.getReference(babakBabaToAttach.getClass(), babakBabaToAttach.getId());
                 attachedBabak.add(babakBabaToAttach);
             }
             korhaz.setBabak(attachedBabak);
-            em.persist(korhaz);
+            entityManager.persist(korhaz);
             for (Baba babakBaba : korhaz.getBabak()) {
                 Korhaz oldKorhazOfBabakBaba = babakBaba.getKorhaz();
                 babakBaba.setKorhaz(korhaz);
-                babakBaba = em.merge(babakBaba);
+                babakBaba = entityManager.merge(babakBaba);
                 if (oldKorhazOfBabakBaba != null) {
                     oldKorhazOfBabakBaba.getBabak().remove(babakBaba);
-                    oldKorhazOfBabakBaba = em.merge(oldKorhazOfBabakBaba);
+                    oldKorhazOfBabakBaba = entityManager.merge(oldKorhazOfBabakBaba);
                 }
             }
             utx.commit();
@@ -80,8 +88,8 @@ public class KorhazJpaController implements Serializable {
             }
             throw ex;
         } finally {
-            if (em != null) {
-                em.close();
+            if (entityManager != null) {
+                entityManager.close();
             }
         }
     }

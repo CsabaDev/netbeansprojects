@@ -13,6 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import static javax.persistence.TemporalType.DATE;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -22,14 +27,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Baba.findAll", query = "SELECT b FROM Baba b")
+    , @NamedQuery(name = "Baba.findById", query = "SELECT b FROM Baba b WHERE b.id = :id")
+    , @NamedQuery(name = "Baba.findBySzulido", query = "SELECT b FROM Baba b WHERE b.szulIdo = :szulido")
+    , @NamedQuery(name = Baba.QUERY_MAI_BABAK, query = "SELECT b FROM Baba b WHERE b.szulIdo = CURRENT_DATE")
+    , @NamedQuery(name = "Baba.findByVaros", query = "SELECT b FROM Baba b WHERE b.varos = :varos")})
+
 public class Baba implements Serializable{
+    
+    public static final String QUERY_MAI_BABAK = "Baba.maiBabak";
     
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nev;
-    private Date szulDatum;
+    @Temporal(DATE)
+    private Date szulIdo;
     private String anyaNev;
     private String apaNev;
     private int nem;
@@ -37,7 +52,7 @@ public class Baba implements Serializable{
     @ManyToOne
     private Korhaz korhaz;
     private String adoszam;
-
+    
     public Long getId() {
         return id;
     }
@@ -54,12 +69,12 @@ public class Baba implements Serializable{
         this.nev = nev;
     }
 
-    public Date getSzulDatum() {
-        return szulDatum;
+    public Date getSzulIdo() {
+        return szulIdo;
     }
 
-    public void setSzulDatum(Date szulDatum) {
-        this.szulDatum = szulDatum;
+    public void setSzulIdo(Date szulIdo) {
+        this.szulIdo = szulIdo;
     }
 
     public String getAnyaNev() {
@@ -137,7 +152,7 @@ public class Baba implements Serializable{
                 nev, anyaNev, apaNev, adoszam, korhaz, varos);
     }
     
-    public String nemToString(int nem){
+    public String nemToString(){
         if(nem %2 == 0){
             return "nő";
         }else{

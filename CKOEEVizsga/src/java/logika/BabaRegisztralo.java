@@ -8,24 +8,24 @@ package logika;
 import entities.Baba;
 import entities.Korhaz;
 import java.io.IOException;
-import java.io.PrintWriter;
-import static java.lang.System.out;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.PageContext;
 import persistence.BabaJpaController;
 import persistence.KorhazJpaController;
 
 /**
  *
- * @author User
+ * @author Czinéné Kertész Orsolya
  */
 public class BabaRegisztralo extends HttpServlet {
 
@@ -43,36 +43,38 @@ public class BabaRegisztralo extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("CKOEEVizsgaPU");
         if (babaController == null) {
-            babaController = new BabaJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+            babaController = new BabaJpaController(emf);
         }
+        
         if (korhazController == null) {
-            korhazController = new KorhazJpaController(Persistence.createEntityManagerFactory("CKOEEVizsgaPU"));
+            korhazController = new KorhazJpaController(emf);
         }
-        //Baba ujBaba = new Baba();
+        
         Baba ujBaba = (Baba)request.getSession().getAttribute("ujBaba");
         try {
             ujSzuletes(ujBaba, request, korhazController, babaController);
             response.sendRedirect("babak.jsp");
+            request.getSession().removeAttribute("ujBaba");
         } catch (Exception ex) {
+            System.out.println("g"+ex.getMessage());
             response.sendRedirect("ujbaba.jsp");
         }
-        
     }
     
     public void ujSzuletes(Baba ujBaba, HttpServletRequest request, 
             KorhazJpaController korhazController, BabaJpaController babaController) throws Exception{
+        request.setCharacterEncoding("UTF-8");
         ujBaba.setNev(request.getParameter("nev"));
         Calendar ma = Calendar.getInstance();
-        Date szulDatum = ma.getTime();
-        ujBaba.setSzulDatum(szulDatum);
+        Date szulIdo = ma.getTime();
+        ujBaba.setSzulIdo(szulIdo);
         ujBaba.setAnyaNev(request.getParameter("anyaNev"));
         ujBaba.setApaNev(request.getParameter("apaNev"));
         ujBaba.setNem(Integer.valueOf((request.getParameter("nem"))));
         ujBaba.setVaros(request.getParameter("varos"));
-        String korhazIdString = request.getParameter("korhaz");
-        Long korhazId = Long.valueOf(korhazIdString);
-        Korhaz korhaz = korhazController.findKorhaz(korhazId);
+        Korhaz korhaz = korhazController.findKorhaz(Long.valueOf(request.getParameter("korhaz")));
         ujBaba.setKorhaz(korhaz);
         ujBaba.setAdoszam(request.getParameter("adoszam"));
         try {

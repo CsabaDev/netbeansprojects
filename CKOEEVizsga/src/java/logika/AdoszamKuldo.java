@@ -16,7 +16,7 @@ import persistence.BabaJpaController;
 
 /**
  *
- * @author User
+ * @author Czinéné Kertész Orsolya
  */
 public class AdoszamKuldo extends HttpServlet {
 

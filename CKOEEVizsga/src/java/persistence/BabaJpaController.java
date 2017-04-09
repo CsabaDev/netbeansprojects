@@ -12,16 +12,18 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import entities.Korhaz;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import persistence.exceptions.NonexistentEntityException;
 import persistence.exceptions.RollbackFailureException;
 
 /**
  *
- * @author User
+ * @author Czinéné Kertész Orsolya
  */
 public class BabaJpaController implements Serializable {
 
@@ -46,7 +48,8 @@ public class BabaJpaController implements Serializable {
             em.getTransaction().begin();
             Korhaz korhaz = baba.getKorhaz();
             if (korhaz != null) {
-                korhaz = em.getReference(korhaz.getClass(), korhaz.getId());
+                Long korhazId = korhaz.getId();
+                korhaz = em.getReference(korhaz.getClass(), korhazId);
                 baba.setKorhaz(korhaz);
             }
             em.persist(baba);
@@ -186,6 +189,17 @@ public class BabaJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Baba> findMaiBabaEntities() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Baba> query =  em.createNamedQuery(Baba.QUERY_MAI_BABAK, Baba.class);
+            List<Baba> maiBabak = query.getResultList();
+            return maiBabak;
         } finally {
             em.close();
         }

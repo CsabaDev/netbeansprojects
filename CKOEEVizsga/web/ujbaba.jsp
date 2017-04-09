@@ -18,9 +18,10 @@
         <script src="scripts/ajaxRequest.js" type="text/javascript"></script>
         <script src="scripts/Checking.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
-        <title>JSP Page</title>
+        <title>Új baba</title>
     </head>
     <body onload="sendReq()">
+        <% response.setCharacterEncoding("UTF-8"); %>
         <jsp:useBean id="ujBaba" scope="session" class="entities.Baba" />
         <h1>Új baba regisztrálása</h1>
         <form name="ujBaba" onsubmit="return nevCheck()" action="BabaRegisztralo" >
@@ -58,10 +59,10 @@
                     <tr>
                         <td>Kórház:</td>
                         <td>
-                            <jsp:useBean id="osszesKorhaz" scope="page" class="persistence.KorhazJpaController" />
-                            <c:set var="korhazak" scope="page" value="${osszesKorhaz.findKorhazEntities()}"/>
                             <select name="korhaz">
-                                <c:forEach items="${korhazak}" var="item">
+                                <jsp:useBean id="korhazak" scope="page" class="persistence.KorhazJpaController" />
+                                <c:set var="korhazLista" scope="page" value="${korhazak.findKorhazEntities()}"/>
+                                <c:forEach items="${korhazLista}" var="item">
                                     <option value="${item.id}">${item.nev}</option>
                                 </c:forEach>
                             </select>

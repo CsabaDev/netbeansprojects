@@ -1,7 +1,7 @@
 <%-- 
-    Document   : babak
-    Created on : 2017.04.03., 11:25:26
-    Author     : Czinéné Kertész Orsolya
+    Document   : maibabak
+    Created on : 2017.04.08., 23:00:52
+    Author     : User
 --%>
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -12,12 +12,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Regisztrált babák</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Regisztrált babák</h1>
+        <h1>Ma született babák</h1>
         <jsp:useBean id="osszesBaba" scope="page" class="persistence.BabaJpaController" />
-        <c:set var="babaTable" scope="page" value="${osszesBaba.findBabaEntities()}"/>
+        <c:set var="maiBabaTable" scope="page" value="${osszesBaba.findMaiBabaEntities()}"/>
         <table border="1">
             <thead>
                 <tr>
@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-            <c:forEach items="${babaTable}" var="item">
+            <c:forEach items="${maiBabaTable}" var="item">
                 <tr>
                     <td>${item.nev}</td>
                     <td>${item.anyaNev}</td>
@@ -44,9 +44,5 @@
             </c:forEach>
             </tbody>
         </table>
-    
-        <a href="ujbaba.jsp">Új baba regisztrálása</a>
-        <a href="index.jsp">Főoldal</a>
-        
     </body>
 </html>
