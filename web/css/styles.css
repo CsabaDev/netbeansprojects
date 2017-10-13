@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Oct 6, 2017, 11:01:19 AM
+    Author     : czine
+*/
+
+body {
+    background-color: white;
+    color: black;
+}
+
+error {
+    color: red;
+}
+
+.guessesTable {
+    
+}
+
+.guessesTable tr {
+    height: 36px;
+}
+
+.guessesTable td {
+    width: 36px;
+}
+
+.guesserTable {
+    border: 1px solid;
+}
+
+.guesserTable tr {
+    height: 36px;
+}
+
+.guesserTable td {
+    width: 36px;
+}
+
+.pickerTable tr {
+    height: 36px;
+}
+
+.pickerTable td {
+    width: 36px;
+}
+
+.codePeg {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: gray;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100px;
+    height: 5px;
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
