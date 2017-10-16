@@ -1,6 +1,11 @@
 /Bank/dist/
 /Bank/build/
+/Bank/nbproject/private/
+/Esemenyek/dist/
+/Esemenyek/build/
 /Esemenyek/nbproject/private/
+/ObserverPattern/dist/
+/ObserverPattern/build/
 /ObserverPattern/nbproject/private/
 /MasterMind/build/
 /MasterMind/dist/
