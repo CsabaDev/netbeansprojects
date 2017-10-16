@@ -1,7 +1,7 @@
 <%-- 
     Document   : header
     Created on : Oct 6, 2017, 2:12:49 PM
-    Author     : czine
+    Author     : Czinéné Kertész Orsi
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

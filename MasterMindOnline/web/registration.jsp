@@ -1,7 +1,7 @@
 <%-- 
     Document   : registration
     Created on : Oct 9, 2017, 2:07:54 PM
-    Author     : czine
+    Author     : Czinéné Kertész Orsi
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

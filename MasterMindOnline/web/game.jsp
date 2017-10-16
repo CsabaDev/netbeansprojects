@@ -1,7 +1,7 @@
 <%-- 
     Document   : game
     Created on : Oct 12, 2017, 10:19:54 AM
-    Author     : czine
+    Author     : Czinéné Kertész Orsi
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

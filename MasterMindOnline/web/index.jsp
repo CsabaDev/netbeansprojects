@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : Oct 6, 2017, 9:44:15 AM
-    Author     : czine
+    Author     : Czinéné Kertész Orsi
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

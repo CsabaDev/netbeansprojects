@@ -1,7 +1,7 @@
 <%-- 
     Document   : authenticate
     Created on : Oct 9, 2017, 2:56:06 PM
-    Author     : czine
+    Author     : Czinéné Kertész Orsi
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" import="java.sql.*, java.util.*"%>
