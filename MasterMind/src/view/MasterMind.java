@@ -1,11 +1,6 @@
-
 package view;
 
-
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,12 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import model.GameModel;
-
 
 public class MasterMind extends javax.swing.JFrame {
     
@@ -29,10 +22,9 @@ public class MasterMind extends javax.swing.JFrame {
     int newMaxNumberOfGuesses = 20;
     boolean newColorsRepeatable = true;
     
-    private JPanel mainPanel;
-    private JButton startGameButton;
-    private JPanel settingsPanel;
-//    private JSplitPane codeLengthJSplitPane;
+    private final JPanel mainPanel;
+    private final JButton startGameButton;
+    private final JPanel settingsPanel;
     private JLabel codeLengthLabel;
     private JSlider codeLengthSlider;
     private JLabel numberOfColorsLabel;
@@ -42,9 +34,7 @@ public class MasterMind extends javax.swing.JFrame {
     private JLabel colorsRepeatableLabel;
     private JCheckBox colorsRepeatableCheckBox;
     
-    
     public MasterMind() {
-        
         mainPanel = new JPanel();
         startGameButton = new JButton();
         settingsPanel = new JPanel();
@@ -144,7 +134,6 @@ public class MasterMind extends javax.swing.JFrame {
         this.add(settingsPanel, BorderLayout.PAGE_END);
         
         this.pack();
-        
     }
     
     public static void main(String[] args)
@@ -155,6 +144,5 @@ public class MasterMind extends javax.swing.JFrame {
                 new MasterMind().setVisible(true);
             }
         });
-        
     }    
 }
