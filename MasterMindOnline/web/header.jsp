@@ -15,7 +15,7 @@
     <body>
     <c:choose>
         <c:when test="${user == null}">
-            <a href="index.jsp">Start a new game as guest</a>, <a href="registration.jsp">register</a>
+            <a href="index.jsp">Start a new game as guest</a>, <a href="register.jsp">register</a>
              or <a href="login.jsp">login</a>
         </c:when>
         <c:when test="${user != null}">

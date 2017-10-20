@@ -16,7 +16,7 @@
             <%@include file="header.jsp" %>
         </header>
         <h1>Login</h1>
-        <form name="loginForm" action="authenticate.jsp">
+        <form name="loginForm" action="LoginServlet" method="post">
             <table>
                 <tr>
                     <td>Username:</td>

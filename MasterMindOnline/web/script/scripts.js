@@ -1,10 +1,18 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 var current = "0";
+
+function checkEquality() {
+    var password = document.getElementById("password").value;
+    var passwordagain = document.getElementById("passwordagain").value;
+    var pwdEquals = document.getElementById("passwordsEquals");
+    if (password === passwordagain) {
+        pwdEquals.innerHTML = '&#10004';
+        document.getElementById("btnRegister").disabled = false;
+    } else {
+        pwdEquals.innerHTML = "!!!";
+        document.getElementById("btnRegister").disabled = true;
+    }
+}
 
 function refreshValue(id, value) {
     document.getElementById(id).innerHTML = value;
@@ -38,6 +46,15 @@ function startEvaluate() {
             var newGuessRow = guessesTable.insertRow(numberOfGuesses);
             drawNewGuess(newGuessRow, guessPegs);
             drawNewEvaluation(newGuessRow, guessPegs.length, response);
+            var gameState = response.split(" ")[0];
+            if (gameState === "gameWon") {
+                alert("Congratulations! You won!");
+                window.location.href = "index.jsp";
+            }
+            if (gameState === "gameOver") {
+                alert("Game over! Better luck next time!");
+                window.location.href = "index.jsp";
+            }
         }
     });
 }
@@ -65,7 +82,7 @@ function drawNewGuess(newGuessRow, guessPegs) {
 }
 
 function drawNewEvaluation(newGuessRow, codeLength, response) {
-    var evaluationColors = response.split(" ");
+    var evaluationColors = response.split(" ").slice(1);
     var evaluationCell = newGuessRow.insertCell(codeLength);
     var evaluationTable = document.createElement("table");
     evaluationCell.appendChild(evaluationTable);

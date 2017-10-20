@@ -21,15 +21,6 @@ import javax.servlet.http.HttpSession;
  */
 public class EvaluatorServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,15 +28,6 @@ public class EvaluatorServlet extends HttpServlet {
 //        response.getWriter().write(colors.toString());
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -63,40 +45,27 @@ public class EvaluatorServlet extends HttpServlet {
         try {
             evaluation = game.addGuess(newGuess);
             String[] evaluationColors = new String[codeLength];
-            String evaluationColorsToPass = "";
+            String data = game.getGameState().toString();
             for (int i = 0; i < codeLength; i++) {
                 evaluationColors[i] = evaluation[i].getResultColorName(evaluation[i]);
-                evaluationColorsToPass = evaluationColorsToPass + evaluationColors[i] + " ";
+                data = data + " " + evaluationColors[i];
             }
-            response.getWriter().write(evaluationColorsToPass);
+            response.getWriter().write(data);
         } catch (Exception ex) {
             response.getWriter().write(ex.getMessage());
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
     
 }
