@@ -7,8 +7,7 @@ package servlets;
 
 import gamemodel.*;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +44,12 @@ public class EvaluatorServlet extends HttpServlet {
         try {
             evaluation = game.addGuess(newGuess);
             String[] evaluationColors = new String[codeLength];
+            GameState gameState = game.getGameState();
+            session.setAttribute("gameState", gameState.toString());
+            if (game.getGameState().equals(GameState.GAME_WON)) {
+                session.setAttribute("endTime", Calendar.getInstance());
+                new RecorderServlet().doGet(request, response);
+            }
             String data = game.getGameState().toString();
             for (int i = 0; i < codeLength; i++) {
                 evaluationColors[i] = evaluation[i].getResultColorName(evaluation[i]);

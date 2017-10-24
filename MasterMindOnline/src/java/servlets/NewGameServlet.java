@@ -3,6 +3,7 @@ package servlets;
 import gamemodel.GameModel;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,43 +16,23 @@ import javax.servlet.http.HttpSession;
  */
 public class NewGameServlet extends HttpServlet {
 
-    //Connection con;
     String errorMsg;
-    GameModel game;
-    //CodePeg[] code;
-    int numberOfColors;
-    int codeLength;
-    int maxNumberOfGuesses;
-    boolean colorsRepeatable;
     HttpSession session;
     
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     //String userName = (String)session.getAttribute("userName");
-    numberOfColors = Integer.parseInt(request.getParameter("numberOfColors"));
-    codeLength = Integer.parseInt(request.getParameter("codeLength"));
-    maxNumberOfGuesses = Integer.parseInt(request.getParameter("maxNumberOfGuesses"));
-    colorsRepeatable = (request.getParameter("colorsRepeatable") != null);
-    game = new GameModel(numberOfColors, codeLength, maxNumberOfGuesses, colorsRepeatable);
+    int numberOfColors = Integer.parseInt(request.getParameter("numberOfColors"));
+    int codeLength = Integer.parseInt(request.getParameter("codeLength"));
+    int maxNumberOfGuesses = Integer.parseInt(request.getParameter("maxNumberOfGuesses"));
+    boolean colorsRepeatable = (request.getParameter("colorsRepeatable") != null);
+    GameModel game = new GameModel(numberOfColors, codeLength, maxNumberOfGuesses, colorsRepeatable);
     session = request.getSession();
-
-    //con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mastermind?zeroDateTimeBehavior=convertToNull", "root", "1234");
-    //application.setAttribute("connection", con);
-
-
     session.setAttribute("game", game);
+    session.setAttribute("gameState", game.getGameState().toString());
+    Calendar startTime = Calendar.getInstance();
+    session.setAttribute("startTime", startTime);
     response.sendRedirect("game.jsp");
-
-
     }
 
 

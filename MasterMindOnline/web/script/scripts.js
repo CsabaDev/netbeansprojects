@@ -92,6 +92,9 @@ function drawNewEvaluation(newGuessRow, codeLength, response) {
         newEvaluationCell.appendChild(newEvaluationPeg);
         newEvaluationPeg.className = "resultPegDiv";
         newEvaluationPeg.style.backgroundColor = evaluationColors[i];
+        if (newEvaluationPeg.readyState === 'complete') {
+            finishIfEnded(response.split(" ")[0]);
+        }
         columnIndex ++;
     }
 }
@@ -103,13 +106,12 @@ function finishIfEnded(gameState) {
         document.getElementById("popupOk").onclick = function () {
             location.href = "index.jsp";
         };
-//                alert("Congratulations! You won!");
-//                window.location.href = "index.jsp";
     }
     if (gameState === "gameOver") {
-
-
-//                alert("Game over! Better luck next time!");
-//                window.location.href = "index.jsp";
+        document.getElementById("popup").style.zIndex = 1;
+        document.getElementById("msg").innerHTML = "Game over! Better luck next time!";
+        document.getElementById("popupOk").onclick = function () {
+            location.href = "index.jsp";
+        };
     }
 }

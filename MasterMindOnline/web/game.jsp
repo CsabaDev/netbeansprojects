@@ -29,6 +29,10 @@
         <div class="main" >
         <p id="log" ></p>
         <table id="guesses" class="guessesTable" numberOfGuesses="${sessionScope.game.guessesUnmodifiable.size()}">
+        <p id="log" >
+        </p>
+        <table id="guesses" class="guessesTable" 
+               numberOfGuesses="${sessionScope.game.guessesUnmodifiable.size()}" >
             <c:if test="${game != null}">
             <c:forEach items="${game.guessesUnmodifiable}" var="guess" varStatus="guessNumber">
                 <tr>
@@ -65,7 +69,7 @@
                     </div></td>
                 </c:forEach>
                 <td>
-                    <button onclick="startEvaluate()">OK</button>
+                    <button onmousedown="startEvaluate()" id="ok">OK</button>
                 </td>
             </tr>    
             <tr>
@@ -79,8 +83,7 @@
                     <td>
                         
                     </td>
-                </tr>
-        
+            </tr>
             <tr>
                 <c:forEach items="${game.getColors()}" var="pickPeg" varStatus="status">
                     <td><div class="codePeg" 
@@ -98,5 +101,6 @@
     </body>
     <footer>
         <%= Calendar.getInstance().getTime() %>
+        
     </footer>
 </html>

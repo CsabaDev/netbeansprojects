@@ -19,7 +19,7 @@
         <%@include file="header.jsp" %>
     </header>
     <body>
-        
+        <c:out value="${sessionScope.errorMessage}" />
         <h1>Settings</h1>
         <form action="newGame">
         <table>

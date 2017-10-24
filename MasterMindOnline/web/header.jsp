@@ -14,12 +14,13 @@
     </head>
     <body>
     <c:choose>
-        <c:when test="${user == null}">
+        <c:when test="${userName == null}">
             <a href="index.jsp">Start a new game as guest</a>, <a href="register.jsp">register</a>
              or <a href="login.jsp">login</a>
         </c:when>
-        <c:when test="${user != null}">
-            <a href="signout.jsp">Sign out</a>
+        <c:when test="${userName != null}">
+            <a href="signout.jsp">Sign out</a> or 
+            <a href="index.jsp">Start a new game!</a>
         </c:when>
     </c:choose>
     </body>
