@@ -21,12 +21,17 @@
     <header>
         <%@include file="header.jsp" %>
     </header>
-    <body>
+        <body onmouseenter="finishIfEnded('${sessionScope.gameState}')">
     
+            <c:if test="${sessionScope.gameState} == 'gameWon' " >
+            <script>popup()</script>
+        </c:if>
         <p id="log" >
             
         </p>
-        <table id="guesses" class="guessesTable" numberOfGuesses="${sessionScope.game.guessesUnmodifiable.size()}">
+        <table id="guesses" class="guessesTable" 
+               numberOfGuesses="${sessionScope.game.guessesUnmodifiable.size()}" 
+               
             <c:if test="${game != null}">
             <c:forEach items="${game.guessesUnmodifiable}" var="guess" varStatus="guessNumber">
                 <tr>
@@ -62,7 +67,7 @@
                     </div></td>
                 </c:forEach>
                 <td>
-                    <button onclick="startEvaluate()">OK</button>
+                    <button onmousedown="startEvaluate()" id="ok">OK</button>
                 </td>
             </tr>    
             <tr>
@@ -95,5 +100,6 @@
     </body>
     <footer>
         <%= Calendar.getInstance().getTime() %>
+        
     </footer>
 </html>

@@ -47,14 +47,9 @@ function startEvaluate() {
             drawNewGuess(newGuessRow, guessPegs);
             drawNewEvaluation(newGuessRow, guessPegs.length, response);
             var gameState = response.split(" ")[0];
-            if (gameState === "gameWon") {
-                alert("Congratulations! You won!");
-                window.location.href = "index.jsp";
-            }
-            if (gameState === "gameOver") {
-                alert("Game over! Better luck next time!");
-                window.location.href = "index.jsp";
-            }
+            if (gameState === "gameWon" || gameState === "gameOver") {
+                location.reload();
+          }
         }
     });
 }
@@ -99,8 +94,24 @@ function drawNewEvaluation(newGuessRow, codeLength, response) {
         newEvaluationCell.appendChild(newEvaluationPeg);
         newEvaluationPeg.className = "resultPegDiv";
         newEvaluationPeg.style.backgroundColor = evaluationColors[i];
+        if (newEvaluationPeg.readyState === 'complete') {
+            finishIfEnded(response.split(" ")[0]);
+        }
         columnIndex ++;
     }
 }
 
+function finishIfEnded(gameState) {
+    if (gameState === "gameWon") {
+        alert("Congratulations! You won!");
+        window.location.href = "hallOfFame.jsp";
+    }
+    if (gameState === "gameOver") {
+        alert("Game over! Better luck next time!");
+        window.location.href = "index.jsp";
+    }
+}
 
+function popup() {
+    alert("It works!");
+}

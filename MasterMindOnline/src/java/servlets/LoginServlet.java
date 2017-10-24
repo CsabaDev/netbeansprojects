@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
         request.getServletContext().setAttribute("connection", con);
         boolean authFlag = isValidUser(userName, password);
         if(authFlag) {
-            request.getSession().setAttribute("user", userName);
+            request.getSession().setAttribute("userName", userName);
             response.sendRedirect("index.jsp");
         } else {
             request.getSession().setAttribute("errorMessage", errorMsg);

@@ -8,7 +8,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<c:remove var="user" scope="session" />
+<c:remove var="userName" scope="session" />
 
 <%
     response.sendRedirect("index.jsp");
