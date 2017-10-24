@@ -11,6 +11,21 @@ and open the template in the editor.
 body {
     background-color: white;
     color: black;
+    text-align: center;
+}
+
+.main {
+    margin: auto;
+    width: 50%;
+}
+
+.popup {
+    position: absolute;
+    width: 33%;
+    left: 33%;
+    top: 120px;
+    border: 1px solid;
+    z-index: -1;
 }
 
 error {
@@ -19,30 +34,21 @@ error {
 
 .guessesTable {
     background-color: gray;
+    border: 1px solid;
+    display: inline-table;
 }
 
-.guessesTable td {
+.guessesTable td, tr {
     width: 36px;
 }
 
 .guesserTable {
     border: 1px solid;
-}
-
-.guesserTable tr {
-    height: 36px;
+    display: inline-table;
 }
 
 .guesserTable td {
-    width: 36px;
-}
-
-.pickerTable tr {
     height: 36px;
-}
-
-.pickerTable td {
-    width: 36px;
 }
 
 .codePeg {

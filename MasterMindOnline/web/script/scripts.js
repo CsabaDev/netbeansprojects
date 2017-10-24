@@ -47,14 +47,7 @@ function startEvaluate() {
             drawNewGuess(newGuessRow, guessPegs);
             drawNewEvaluation(newGuessRow, guessPegs.length, response);
             var gameState = response.split(" ")[0];
-            if (gameState === "gameWon") {
-                alert("Congratulations! You won!");
-                window.location.href = "index.jsp";
-            }
-            if (gameState === "gameOver") {
-                alert("Game over! Better luck next time!");
-                window.location.href = "index.jsp";
-            }
+            finishIfEnded(gameState);
         }
     });
 }
@@ -103,4 +96,20 @@ function drawNewEvaluation(newGuessRow, codeLength, response) {
     }
 }
 
+function finishIfEnded(gameState) {
+    if (gameState === "gameWon") {
+        document.getElementById("popup").style.zIndex = 1;
+        document.getElementById("msg").innerHTML = "Congratulations! You won!";
+        document.getElementById("popupOk").onclick = function () {
+            location.href = "index.jsp";
+        };
+//                alert("Congratulations! You won!");
+//                window.location.href = "index.jsp";
+    }
+    if (gameState === "gameOver") {
 
+
+//                alert("Game over! Better luck next time!");
+//                window.location.href = "index.jsp";
+    }
+}

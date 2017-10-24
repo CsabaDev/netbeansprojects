@@ -21,11 +21,13 @@
     <header>
         <%@include file="header.jsp" %>
     </header>
-    <body>
-    
-        <p id="log" >
-            
-        </p>
+    <body onload="finishIfEnded('${sessionScope.game.gameState.toString()}')">
+        <div class="popup" id="popup" >
+            <p id="msg"></p>
+            <button id="popupOk" >OK</button>
+        </div>
+        <div class="main" >
+        <p id="log" ></p>
         <table id="guesses" class="guessesTable" numberOfGuesses="${sessionScope.game.guessesUnmodifiable.size()}">
             <c:if test="${game != null}">
             <c:forEach items="${game.guessesUnmodifiable}" var="guess" varStatus="guessNumber">
@@ -52,6 +54,7 @@
             </c:forEach>
             </c:if>
         </table>
+        <br/>
         <table class="guesserTable">
             <tr>
                 <c:forEach items="${game.code}" var="guessPeg" varStatus="status">
@@ -77,8 +80,7 @@
                         
                     </td>
                 </tr>
-        </table>
-        <table class="pickerTable">
+        
             <tr>
                 <c:forEach items="${game.getColors()}" var="pickPeg" varStatus="status">
                     <td><div class="codePeg" 
@@ -92,6 +94,7 @@
                 </c:forEach>
             </tr>
         </table>
+        </div>
     </body>
     <footer>
         <%= Calendar.getInstance().getTime() %>
