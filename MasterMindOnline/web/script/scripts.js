@@ -115,3 +115,27 @@ function finishIfEnded(gameState) {
         };
     }
 }
+
+function showHallOfFame() {
+    var numberOfColors = document.getElementById("numberOfColorsSlider").value;
+    var codeLength = document.getElementById("codeLengthSlider").value;
+    var colorsRepeatable = (document.getElementById("colorsRepeatable").checked);
+    var params = {
+        numberOfColors: numberOfColors,
+        codeLength: codeLength,
+        colorsRepeatable: colorsRepeatable
+    };
+    $.get("QueryServlet", $.param(params), function(responseJson) {
+        document.getElementById("log").innerHTML = responseJson.toString();
+        var table = document.getElementById("hallOfFameTable");
+        $("#hallOfFameTable tbody").remove();
+        var results = JSON.parse(responseJson);
+        for (var i = 0, max = 10; i < max; i++) {
+            var newRow = table.insertRow(i);
+            newRow.insertCell(0).innerHTML = results[i].userName;
+            newRow.insertCell(1).innerHTML = results[i].number;
+            newRow.insertCell(2).innerHTML = results[i].time /10 + " sec";
+            newRow.insertCell(3).innerHTML = results[i].date;
+        }
+    });
+}

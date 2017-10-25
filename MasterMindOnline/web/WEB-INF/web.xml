@@ -29,6 +29,10 @@
         <servlet-name>RecorderServlet</servlet-name>
         <servlet-class>servlets.RecorderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>QueryServlet</servlet-name>
+        <servlet-class>servlets.QueryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
@@ -52,6 +56,10 @@
     <servlet-mapping>
         <servlet-name>RecorderServlet</servlet-name>
         <url-pattern>/RecorderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>QueryServlet</servlet-name>
+        <url-pattern>/QueryServlet/*</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

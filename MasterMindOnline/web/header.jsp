@@ -15,10 +15,13 @@
     <body>
     <c:choose>
         <c:when test="${userName == null}">
-            <a href="index.jsp">Start a new game as guest</a>, <a href="register.jsp">register</a>
+            <a href="index.jsp">Start a new game as guest</a>,
+             <a href="hallOfFame.jsp">see Hall of Fame</a>,
+             <a href="register.jsp">register</a>
              or <a href="login.jsp">login</a>
         </c:when>
         <c:when test="${userName != null}">
+            <a href="hallOfFame.jsp">See Hall of Fame</a>,
             <a href="signout.jsp">Sign out</a> or 
             <a href="index.jsp">Start a new game!</a>
         </c:when>

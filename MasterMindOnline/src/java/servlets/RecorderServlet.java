@@ -151,11 +151,11 @@ public class RecorderServlet extends HttpServlet {
             if(result > 0) {
                 return true;
             } else {
-                errorMsg = "Sorry, an error occured. We couldn't record your result.";
+                errorMsg = "Sorry, an error occured.";
                 return false;
             }
         } catch (Exception ex) {
-            errorMsg = "Sorry, an error occured. We couldn't record your result.";
+            errorMsg = "Sorry, an error occured.";
             errorMsg = errorMsg + ex;
             ex.printStackTrace();
             System.out.println(ex);
@@ -163,9 +163,9 @@ public class RecorderServlet extends HttpServlet {
         return false;
     }
     
-    private boolean getTopTen() {
+    private ResultSet getTopTen(int numberOfColors, int codeLength, int colorsRepeatableInt) {
         try {
-            String query = "select * FROM mastermind.results where " +
+            String query = "select userName, numberOfGuesses, timeOfGame, dateOfGame FROM results where " +
                     "numberOfColors = ? and codeLength = ? and colorsRepeatable = ? " +
                     "order by numberOfGuesses, timeOfGame;";
             PreparedStatement ps = con.prepareStatement(query);
@@ -173,6 +173,9 @@ public class RecorderServlet extends HttpServlet {
             ps.setInt(2, codeLength);
             ps.setInt(3, colorsRepeatableInt);
             ResultSet rs = ps.executeQuery(query);
+            return rs;
+//            while (rs.next()) {
+//            }
 //            if(result > 0) {
 //                return true;
 //            } else {
@@ -185,6 +188,6 @@ public class RecorderServlet extends HttpServlet {
             ex.printStackTrace();
             System.out.println(ex);
         }
-        return false;
+        return null;
     }
 }

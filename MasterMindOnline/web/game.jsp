@@ -69,20 +69,18 @@
                     </div></td>
                 </c:forEach>
                 <td>
-                    <button onmousedown="startEvaluate()" id="ok">OK</button>
+                    <button onclick="startEvaluate()" id="ok">OK</button>
                 </td>
             </tr>    
             <tr>
-                    <c:forEach items="${game.code}" var="guessPeg" varStatus="status">
-                        <td><div class="codePeg" 
-                                 style="background-color: <c:out value="${guessPeg.getColorName(guessPeg)}"/>"
-                                 id="<c:out value = "guessPeg${String.valueOf(status.count)}"/>" 
-                                 onclick="setCurrent(id)">
-                        </div></td>
-                    </c:forEach>
-                    <td>
-                        
-                    </td>
+                <c:forEach items="${game.code}" var="guessPeg" varStatus="status">
+                    <td><div class="codePeg" 
+                             style="background-color: <c:out value="${guessPeg.getColorName(guessPeg)}"/>"
+                             id="<c:out value = "guessPeg${String.valueOf(status.count)}"/>" 
+                             onclick="setCurrent(id)">
+                    </div></td>
+                </c:forEach>
+                <td></td>
             </tr>
             <tr>
                 <c:forEach items="${game.getColors()}" var="pickPeg" varStatus="status">
