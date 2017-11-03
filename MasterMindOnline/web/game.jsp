@@ -72,6 +72,7 @@
                     <button onclick="startEvaluate()" id="ok">OK</button>
                 </td>
             </tr>    
+<%--            
             <tr>
                 <c:forEach items="${game.code}" var="guessPeg" varStatus="status">
                     <td><div class="codePeg" 
@@ -82,6 +83,7 @@
                 </c:forEach>
                 <td></td>
             </tr>
+--%>            
             <tr>
                 <c:forEach items="${game.getColors()}" var="pickPeg" varStatus="status">
                     <td><div class="codePeg" 

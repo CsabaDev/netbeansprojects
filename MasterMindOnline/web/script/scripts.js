@@ -116,26 +116,42 @@ function finishIfEnded(gameState) {
     }
 }
 
-function showHallOfFame() {
+function showHallOfFame(userName) {
     var numberOfColors = document.getElementById("numberOfColorsSlider").value;
     var codeLength = document.getElementById("codeLengthSlider").value;
     var colorsRepeatable = (document.getElementById("colorsRepeatable").checked);
+    var onlyMine = (document.getElementById("onlyMine").checked);
     var params = {
         numberOfColors: numberOfColors,
         codeLength: codeLength,
-        colorsRepeatable: colorsRepeatable
+        colorsRepeatable: colorsRepeatable,
+        onlyMine: onlyMine
     };
     $.get("QueryServlet", $.param(params), function(responseJson) {
         document.getElementById("log").innerHTML = responseJson.toString();
-        var table = document.getElementById("hallOfFameTable");
-        $("#hallOfFameTable tbody").remove();
+        var tbody = document.getElementById("hallOfFameTableRows");
+        $("#hallOfFameTableRows tr").remove();
         var results = JSON.parse(responseJson);
-        for (var i = 0, max = 10; i < max; i++) {
-            var newRow = table.insertRow(i);
-            newRow.insertCell(0).innerHTML = results[i].userName;
-            newRow.insertCell(1).innerHTML = results[i].number;
-            newRow.insertCell(2).innerHTML = results[i].time /10 + " sec";
-            newRow.insertCell(3).innerHTML = results[i].date;
+        if(userName === "" && onlyMine === true) {
+            var messageRow = tbody.insertRow(0).insertCell(0);
+            messageRow.colSpan = 3;
+            messageRow.innerHTML = "If you wish to store your results, " +
+                    "<a href='register.jsp'>create an account</a>" + "!";
+            return;
+        }
+        for (var i = 0, max = Math.min(10,results.length); i < max; i++) {
+            var newRow = tbody.insertRow(i);
+            newRow.insertCell(0).innerHTML = results[i].number;
+            newRow.insertCell(1).innerHTML = results[i].time /10 + " sec";
+            newRow.insertCell(2).innerHTML = results[i].date;
+            if(onlyMine === false) {
+                newRow.insertCell(0).innerHTML = results[i].userName;
+            }
         }
     });
+    if(onlyMine === true) {
+        $("#hallOfFameTable th:first-child").hide();
+    } else {
+        $("#hallOfFameTable th:first-child").show();
+    }
 }

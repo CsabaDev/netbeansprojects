@@ -141,7 +141,7 @@ public class RecorderServlet extends HttpServlet {
             String sql = "delete FROM results where " +
                     "id = (select id from (select * from results where " +
                     "userName = ? and numberOfColors = ? and codeLength = ? and colorsRepeatable = ? " +
-                    "order by numberOfGuesses, timeOfGame limit 10,1) as t);";
+                    "order by timeOfGame, numberOfGuesses limit 10,1) as t);";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, userName);
             ps.setInt(2, numberOfColors);
@@ -163,31 +163,4 @@ public class RecorderServlet extends HttpServlet {
         return false;
     }
     
-    private ResultSet getTopTen(int numberOfColors, int codeLength, int colorsRepeatableInt) {
-        try {
-            String query = "select userName, numberOfGuesses, timeOfGame, dateOfGame FROM results where " +
-                    "numberOfColors = ? and codeLength = ? and colorsRepeatable = ? " +
-                    "order by numberOfGuesses, timeOfGame;";
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1, numberOfColors);
-            ps.setInt(2, codeLength);
-            ps.setInt(3, colorsRepeatableInt);
-            ResultSet rs = ps.executeQuery(query);
-            return rs;
-//            while (rs.next()) {
-//            }
-//            if(result > 0) {
-//                return true;
-//            } else {
-//                errorMsg = "Sorry, an error occured. We couldn't record your result.";
-//                return false;
-//            }
-        } catch (Exception ex) {
-            errorMsg = "Sorry, an error occured.";
-            errorMsg = errorMsg + ex;
-            ex.printStackTrace();
-            System.out.println(ex);
-        }
-        return null;
-    }
 }

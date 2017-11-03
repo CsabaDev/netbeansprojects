@@ -42,11 +42,24 @@
                         <td></td>
                         <td><input id="colorsRepeatable" type="checkbox" checked="true"></td>
                     </tr>
+                    <tr>
+                        <td>Only my best results:</td>
+                        <td></td>
+                        <td><input id="onlyMine" type="checkbox" ></td>
+                    </tr>
                 </table>
-                <p><button onclick="showHallOfFame()" id="show" >Show!</button></p>
+                <p><button onclick="showHallOfFame('${userName}')" id="show" >Show!</button></p>
             
             <table id="hallOfFameTable">
-                
+                <thead>
+                    <th>Username</th>
+                    <th>Number of guesses</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                </thead>
+                <tbody id="hallOfFameTableRows">
+                    
+                </tbody>
             </table>
         </div>
     </body>

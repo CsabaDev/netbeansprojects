@@ -46,7 +46,7 @@ public class EvaluatorServlet extends HttpServlet {
             String[] evaluationColors = new String[codeLength];
             GameState gameState = game.getGameState();
             session.setAttribute("gameState", gameState.toString());
-            if (game.getGameState().equals(GameState.GAME_WON)) {
+            if (game.getGameState().equals(GameState.GAME_WON) && session.getAttribute("userName") != null) {
                 session.setAttribute("endTime", Calendar.getInstance());
                 new RecorderServlet().doGet(request, response);
             }

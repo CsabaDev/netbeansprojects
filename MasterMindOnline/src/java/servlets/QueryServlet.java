@@ -43,6 +43,8 @@ public class QueryServlet extends HttpServlet {
         String codeLength = request.getParameter("codeLength");
         String colorsRepeatable = (request.getParameter("colorsRepeatable"));
         String colorsRepeatableInt = (colorsRepeatable.equals("true")) ? "1" : "0";
+        String onlyMine = (request.getParameter("onlyMine"));
+        session = request.getSession();
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/mastermind", "root", "1234");
         } catch (SQLException ex) {
@@ -50,11 +52,16 @@ public class QueryServlet extends HttpServlet {
         }
         request.getServletContext().setAttribute("connection", con);
         try {
-            String query = "select userName, numberOfGuesses, timeOfGame, dateOfGame FROM results where "
-                    + "numberOfColors = " + numberOfColors 
-                    + " and codeLength = " + codeLength
-                    + " and colorsRepeatable = " + colorsRepeatableInt
-                    + " order by numberOfGuesses, timeOfGame;";
+            String query = "select userName, numberOfGuesses, timeOfGame, dateOfGame FROM results where";
+            StringBuilder queryBuilder = new StringBuilder(query);
+            if(onlyMine.equals("true")) {
+                queryBuilder.append(" userName = '").append(session.getAttribute("userName")).append("' and");
+            }
+            queryBuilder.append(" numberOfColors = ").append(numberOfColors);
+            queryBuilder.append(" and codeLength = ").append(codeLength);
+            queryBuilder.append(" and colorsRepeatable = ").append(colorsRepeatableInt);
+            queryBuilder.append(" order by timeOfGame, numberOfGuesses;");
+            query = queryBuilder.toString();
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery(query);
             List<Result> results = new ArrayList();
