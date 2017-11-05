@@ -1,3 +1,4 @@
+<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,10 +10,10 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/script/scripts.js"></script>
         <title>Login</title>
     </head>
+    <header>
+        <%@include file="header.jsp" %>
+    </header>
     <body>
-        <header>
-            <%@include file="header.jsp" %>
-        </header>
         <div class="popup" id="popup" >
             <p id="msg"></p>
             <button id="popupOk" >OK</button>
@@ -40,4 +41,7 @@
         <c:remove var="errorMessage" scope="session" />
         </div>
     </body>
+    <footer>
+        <%= Calendar.getInstance().getTime() %>
+    </footer>
 </html>

@@ -4,6 +4,7 @@
     Author     : Czinéné Kertész Orsi
 --%>
 
+<%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -16,10 +17,10 @@
         <script type="text/javascript" src="${pageContext.request.contextPath}/script/scripts.js"></script>
         <title>Registration Form</title>
     </head>
+    <header>
+        <%@include file="header.jsp" %>
+    </header>
     <body>
-        <header>
-            <%@include file="header.jsp" %>
-        </header>
         <input type="hidden" name="refresh" id="refresh" value="no">
         <div class="popup" id="popup" >
             <p id="msg"></p>
@@ -53,4 +54,7 @@
         <c:remove var="errorMessage" scope="session" />
         </div>
     </body>
+    <footer>
+        <%= Calendar.getInstance().getTime() %>
+    </footer>
 </html>

@@ -16,7 +16,7 @@ function refreshColor(pickId) {
 
 function startEvaluate() {
     var guessesTable = document.getElementById("guesses");
-    var numberOfGuesses = guessesTable.rows.length - 3;
+    var numberOfGuesses = guessesTable.rows.length;
     var guessPegs = document.getElementsByClassName("guessPegDiv");
     var colorsJSon = getNewGuess(guessPegs);
     $.get("evaluator", $.param(colorsJSon), function(response) {
@@ -26,6 +26,7 @@ function startEvaluate() {
             var newGuessRow = guessesTable.insertRow(numberOfGuesses);
             drawNewGuess(newGuessRow, guessPegs);
             drawNewEvaluation(newGuessRow, guessPegs.length, response);
+            newGuessRow.scrollIntoView(true);
             var gameState = response.split(" ")[0];
             finishIfEnded(gameState);
         }
@@ -58,6 +59,7 @@ function drawNewEvaluation(newGuessRow, codeLength, response) {
     var evaluationColors = response.split(" ").slice(1);
     var evaluationCell = newGuessRow.insertCell(codeLength);
     var evaluationTable = document.createElement("table");
+    evaluationTable.className += "resultTable";
     evaluationCell.appendChild(evaluationTable);
     var newEvaluationRow = evaluationTable.insertRow(0);
     var columnIndex = 0;
@@ -81,7 +83,7 @@ function drawNewEvaluation(newGuessRow, codeLength, response) {
 
 function finishIfEnded(gameState) {
     if (gameState === "gameWon") {
-        myPopUp("Congratulations! You won!", "index.jsp");
+        myPopUp("Congratulations! You won!", "hallOfFame.jsp");
     }
     if (gameState === "gameOver") {
         myPopUp("Game over! Better luck next time!", "index.jsp");

@@ -21,19 +21,21 @@
         <header>
         <%@include file="header.jsp" %>
     </header>
-    <body>
+    <body onload="showHallOfFame(${userName})">
         <div class="main" >
             <h1>HALL OF FAME</h1>
             <table class="formTable">
                     <tr>
                         <td>Number of colors:</td>
                         <td id="numberOfColors">8</td>
-                        <td><input class="slider" id="numberOfColorsSlider" name="numberOfColors" type="range" oninput="refreshValue(this.name,this.value)" min="6" max="10" value="8"></td>
+                        <td><input class="slider" id="numberOfColorsSlider" name="numberOfColors" type="range" 
+                                   oninput="refreshValue(this.name,this.value)" min="6" max="10" value="8"></td>
                     </tr>
                     <tr>
                         <td>Length of code:</td>
                         <td id="codeLength">4</td>
-                        <td><input class="slider" id="codeLengthSlider" name="codeLength" type="range" oninput="refreshValue(this.name,this.value)" min="4" max="8" value="4"></td>
+                        <td><input class="slider" id="codeLengthSlider" name="codeLength" type="range" 
+                                   oninput="refreshValue(this.name,this.value)" min="4" max="8" value="4"></td>
                     </tr>
                     <tr>
                         <td>Colors repeatable:</td>
@@ -48,12 +50,12 @@
                 </table>
                 <p><button onclick="showHallOfFame('${userName}')" id="show" >Show!</button></p>
             
-            <table id="hallOfFameTable">
+            <table id="hallOfFameTable" class="hallOfFameTable">
                 <thead>
-                    <th>Username</th>
-                    <th>Number of guesses</th>
-                    <th>Time</th>
-                    <th>Date</th>
+                    <th>username</th>
+                    <th>guesses</th>
+                    <th>time</th>
+                    <th>date</th>
                 </thead>
                 <tbody id="hallOfFameTableRows">
                     
@@ -61,4 +63,7 @@
             </table>
         </div>
     </body>
+    <footer>
+        <%= Calendar.getInstance().getTime() %>
+    </footer>
 </html>
