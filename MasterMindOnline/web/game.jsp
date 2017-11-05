@@ -13,24 +13,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
-        <script src="${pageContext.request.contextPath}/script/scripts.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/script/scripts.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/script/gameController.js"></script>
         <title>Playing MasterMind</title>
     </head>
     <header>
         <%@include file="header.jsp" %>
     </header>
-    <body onload="finishIfEnded('${sessionScope.game.gameState.toString()}')">
+    <body onload="finishIfEnded('${game.gameState.toString()}')" onpageshow="loadPage()">
+        <input type="hidden" name="refresh" id="refresh" value="no">
         <div class="popup" id="popup" >
             <p id="msg"></p>
             <button id="popupOk" >OK</button>
+            <p/>
         </div>
         <div class="main" >
         <p id="log" ></p>
-        <table id="guesses" class="guessesTable" numberOfGuesses="${sessionScope.game.guessesUnmodifiable.size()}">
-        <p id="log" >
-        </p>
         <table id="guesses" class="guessesTable" 
                numberOfGuesses="${sessionScope.game.guessesUnmodifiable.size()}" >
             <c:if test="${game != null}">
@@ -57,33 +57,17 @@
                 </tr>
             </c:forEach>
             </c:if>
-        </table>
-        <br/>
-        <table class="guesserTable">
-            <tr>
+            <tr id="guesser">
                 <c:forEach items="${game.code}" var="guessPeg" varStatus="status">
                     <td><div class="guessPegDiv" 
-                             style="background-color: gray"
                              id="<c:out value = "guessPeg${String.valueOf(status.count)}"/>" 
                              onclick="setCurrent(id)">
                     </div></td>
                 </c:forEach>
                 <td>
-                    <button onclick="startEvaluate()" id="ok">OK</button>
+                    <button onclick="startEvaluate()" id="ok" class="gameButton">OK</button>
                 </td>
-            </tr>    
-<%--            
-            <tr>
-                <c:forEach items="${game.code}" var="guessPeg" varStatus="status">
-                    <td><div class="codePeg" 
-                             style="background-color: <c:out value="${guessPeg.getColorName(guessPeg)}"/>"
-                             id="<c:out value = "guessPeg${String.valueOf(status.count)}"/>" 
-                             onclick="setCurrent(id)">
-                    </div></td>
-                </c:forEach>
-                <td></td>
             </tr>
---%>            
             <tr>
                 <c:forEach items="${game.getColors()}" var="pickPeg" varStatus="status">
                     <td><div class="codePeg" 

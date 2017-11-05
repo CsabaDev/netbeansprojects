@@ -13,18 +13,21 @@
         <title>header</title>
     </head>
     <body>
+        <ul class="navigation" >
     <c:choose>
         <c:when test="${userName == null}">
-            <a href="index.jsp">Start a new game as guest</a>,
-             <a href="hallOfFame.jsp">see Hall of Fame</a>,
-             <a href="register.jsp">register</a>
-             or <a href="login.jsp">login</a>
+            <li><a href="index.jsp">new game</a></li>
+            <li><a href="hallOfFame.jsp">Hall of Fame</a></li>
+            <li><a href="register.jsp">register</a></li>
+            <li><a href="login.jsp">login</a></li>
         </c:when>
         <c:when test="${userName != null}">
-            <a href="hallOfFame.jsp">See Hall of Fame</a>,
-            <a href="signout.jsp">Sign out</a> or 
-            <a href="index.jsp">Start a new game!</a>
+            <li>Hello <c:out value="${userName}"></c:out>!</li>
+            <li><a href="index.jsp">new game</a></li>
+            <li><a href="hallOfFame.jsp">Hall of Fame</a></li>
+            <li><a href="signout.jsp">sign out</a></li>
         </c:when>
     </c:choose>
+        </ul>
     </body>
 </html>

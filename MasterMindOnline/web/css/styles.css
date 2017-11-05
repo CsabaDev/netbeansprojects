@@ -1,89 +1,101 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 6, 2017, 11:01:19 AM
-    Author     : Czinéné Kertész Orsi
-*/
-
 body {
-    background-color: white;
-    color: black;
+    background-color: burlywood;
+    color: #331a00;
     text-align: center;
 }
 
-.main {
-    margin: auto;
+header {
     width: 50%;
+    min-width: 400px;
+    margin: auto;
+    padding: 10px 0px;
 }
 
-.popup {
-    position: absolute;
-    width: 33%;
-    left: 33%;
-    top: 120px;
-    border: 1px solid;
-    z-index: -1;
+footer {
+    width: 50%;
+    min-width: 400px;
+    margin: auto;
+    padding: 10px;
 }
+
+.main {
+    width: 50%;
+    min-width: 400px;
+    margin: auto;
+    padding: 20px;
+    box-shadow: 0 0 4px saddlebrown;
+    opacity: 100%;
+    background-color: wheat;
+}
+
 
 error {
     color: red;
 }
 
 .guessesTable {
-    background-color: gray;
-    border: 1px solid;
+    padding: 10px;
+    background-color: burlywood;
+    border: 2px ridge saddlebrown;
+    border-radius: 5px;
     display: inline-table;
+    
 }
 
 .guessesTable td, tr {
-    width: 36px;
+    width: 48px;
 }
 
-.guesserTable {
-    border: 1px solid;
-    display: inline-table;
+#guesser {
+    height: 58px;
+    margin-bottom: 3px;
+    margin-top: 3px;
 }
 
-.guesserTable td {
-    height: 36px;
+#guesser td {
+    border-top: 2px ridge saddlebrown; 
+    border-bottom: 2px ridge saddlebrown;
 }
 
 .codePeg {
-    width: 30px;
-    height: 30px;
-    border: 1px solid;
+    width: 42px;
+    height: 42px;
+    border: 1px solid saddlebrown;
     border-radius: 50%;
-    background-color: gray;
+    background-color: burlywood;
 }
 
 .guessPegDiv {
-    width: 30px;
-    height: 30px;
-    border: 1px solid;
+    width: 42px;
+    height: 42px;
+    border: 1px solid saddlebrown;
     border-radius: 50%;
-    background-color: gray;
+    background-color: burlywood;
 }
 
 .resultPegDiv {
-    width: 12px;
-    height: 12px;
-    border: 1px solid;
+    width: 16px;
+    height: 16px;
+    border: 1px solid saddlebrown;
     border-radius: 50%;
-    background-color: gray;
+    background-color: burlywood;
+}
+
+.formTable td {
+    text-align: left;
+    padding: 5px 10px 5px 10px;
 }
 
 .slider {
     -webkit-appearance: none;
-    width: 100px;
+    width: 160px;
     height: 5px;
     border-radius: 5px;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
+    background: burlywood;
 }
 
 .slider:hover {
@@ -96,7 +108,7 @@ error {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: saddlebrown;
     cursor: pointer;
 }
 
@@ -104,6 +116,94 @@ error {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background: #4CAF50;
+    background: saddlebrown;
     cursor: pointer;
+}
+
+input[type = "submit"] {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: burlywood;
+    border-color: burlywood;
+}
+
+input[type = "submit"]:disabled {
+    color: wheat;
+}
+
+input[type = "submit"]:focus {
+    outline:0;
+}
+
+.gameButton {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: saddlebrown;
+    color: burlywood;
+    border-color: saddlebrown;
+}
+
+.gameButton:focus {
+    outline:0;
+}
+
+button {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: burlywood;
+    border-color: burlywood;
+}
+
+button:focus {
+    outline:0;
+}
+
+.popup {
+    position: absolute;
+    width: 33%;
+    left: 33%;
+    top: 120px;
+    border: 1px solid;
+    box-shadow: 0 0 8px saddlebrown;
+    z-index: -1;
+    visibility: hidden;
+    background-color: wheat;
+    opacity: 100%;
+}
+
+.navigation {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+.navigation li {
+    float: left;
+    width: 25%;
+}
+
+.navigation li a {
+    width: 80%;
+    margin: 1px 10px;
+    padding: 2px 4px;
+    display: inline-block;
+    text-align:center;
+    text-decoration: none;
+    color: #331a00;
+    background: wheat;
+    box-shadow: 0 0 4px saddlebrown;
+    border-radius: 5px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+
+.navigation li a:hover{
+  background: saddlebrown;
+  color: wheat;
+  box-shadow: 0 0 4px wheat;
 }

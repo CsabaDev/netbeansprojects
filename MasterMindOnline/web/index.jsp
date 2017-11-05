@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : Oct 6, 2017, 9:44:15 AM
-    Author     : Czinéné Kertész Orsi
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.*" %>
@@ -19,10 +13,16 @@
         <%@include file="header.jsp" %>
     </header>
     <body>
+        <div class="popup" id="popup" >
+            <p id="msg"></p>
+            <button id="popupOk" >OK</button>
+            <p/>
+        </div>
+        <div class="main" >
         <c:out value="${sessionScope.errorMessage}" />
         <h1>Settings</h1>
         <form action="newGame">
-        <table>
+        <table class="formTable">
             <tr>
                 <td>Number of colors:</td>
                 <td id="numberOfColors">8</td>
@@ -46,6 +46,7 @@
         </table>
             <p><input type="submit" value="Start!"></p>
         </form>
+        </div>
     </body>
     <footer>
         <%= Calendar.getInstance().getTime() %>

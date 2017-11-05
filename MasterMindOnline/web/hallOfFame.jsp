@@ -22,11 +22,9 @@
         <%@include file="header.jsp" %>
     </header>
     <body>
-        <h1>HALL OF FAME</h1>
-        <p id="log"></p>
         <div class="main" >
-            
-                <table>
+            <h1>HALL OF FAME</h1>
+            <table class="formTable">
                     <tr>
                         <td>Number of colors:</td>
                         <td id="numberOfColors">8</td>

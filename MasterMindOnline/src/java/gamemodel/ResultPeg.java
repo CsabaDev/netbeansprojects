@@ -7,7 +7,7 @@ public enum ResultPeg {
         switch (resultPeg) {
             case BLACK : return "black";
             case WHITE : return "white";
-            case EMPTY : return "gray";
+            case EMPTY : return "burlywood";
         }
         return null;
     }

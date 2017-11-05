@@ -9,14 +9,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src="${pageContext.request.contextPath}/script/scripts.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/script/scripts.js"></script>
         <title>Registration Form</title>
     </head>
     <body>
         <header>
             <%@include file="header.jsp" %>
         </header>
+        <input type="hidden" name="refresh" id="refresh" value="no">
+        <div class="popup" id="popup" >
+            <p id="msg"></p>
+            <button id="popupOk" >OK</button>
+            <p/>
+        </div>
+        <div class="main" >
         <h1>Register</h1>
         <form name="registrationForm" action="RegisterServlet" method="post">
             <table>
@@ -41,5 +51,6 @@
         </form>
         <p style="color: red"><c:out value="${sessionScope.errorMessage}" /></p>
         <c:remove var="errorMessage" scope="session" />
+        </div>
     </body>
 </html>
